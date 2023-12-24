@@ -3,6 +3,7 @@ import { SalepersonModule } from './salesperson/salesperson.module';
 import { ConfigModule } from '@nestjs/config';
 
 import { MongooseModule } from '@nestjs/mongoose';
+import { UserModule } from './user/user.module';
 
 
 @Module({
@@ -12,6 +13,7 @@ import { MongooseModule } from '@nestjs/mongoose';
       process.env.MONGODB_CONNECTION_STRING,
     ),
     SalepersonModule,
+    UserModule,
   ],
   controllers: [],
   providers: [],
