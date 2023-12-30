@@ -1,12 +1,14 @@
-import { Body, Controller, Get, Inject, Post, Query } from "@nestjs/common";
+import { Body, Controller, Get, Inject, Post, Query, UseGuards } from "@nestjs/common";
 import { ResponseSalespersonDto } from "src/salesperson/application/dto/response.salesperson.dto";
 import { Salesperson } from "src/salesperson/domain/model/salesperson";
 import { SalespersonService } from "src/salesperson/domain/service/salesperson.service";
+import { SalespersonGuard } from "src/salesperson/infrastructure/security/salesperson.guard";
 
 @Controller('salespersons')
 export class SalespersonController {
   constructor(@Inject("SalespersonService") private readonly salespersonService: SalespersonService) {}
 
+  @UseGuards(SalespersonGuard)
   @Get()
   async getAllSalesperson(@Query("page") page: number, @Query("limit") limit: number): Promise<ResponseSalespersonDto> {
     let no = page >= 1 ? page : 1;
