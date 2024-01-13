@@ -1,4 +1,5 @@
 import { Controller, Get, Inject, Query } from '@nestjs/common';
+import { ResponseUserDto } from 'src/user/application/dto/response.user.dto';
 import { ResponseUserListDto } from 'src/user/application/dto/response.user.list.dto';
 import { UserService } from 'src/user/domain/service/user.service';
 
@@ -14,8 +15,8 @@ export class UserController {
     return await this.userService.getAllUser(no, lim);
   }
 
-  @Get('email')
-  async getUserByEmail(@Query('email') email: string) {
+  @Get('/by-email')
+  async getUserByEmail(@Query('email') email: string): Promise<ResponseUserDto> {
     return await this.userService.getUserByEmail(email);
   }
 }
